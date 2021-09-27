@@ -1,0 +1,9 @@
+[submodule "regis-msds-jupyter"]
+	path = regis-msds-jupyter
+	url = git@github.com:kerry-t-johnson/regis-msds-jupyter.git
+[submodule "regis-msds-610-data-engineering"]
+	path = regis-msds-610-data-engineering
+	url = git@github.com:kerry-t-johnson/regis-msds-610-data-engineering.git
+[submodule "hadoop-single-node-cluster"]
+	path = hadoop-single-node-cluster
+	url = git@github.com:kerry-t-johnson/hadoop-single-node-cluster.git

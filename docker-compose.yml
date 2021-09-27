@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  jupyter-dev:
+    image: jupyter-dev:latest
+    container_name: jupyter-dev
+    hostname: jupyter-dev
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - '8888:8888'
+    volumes:
+      - type: bind
+        source: ./regis-msds-jupyter/.jupyter
+        target: /home/jovyan/.jupyter
+
+      - type: bind
+        source: ./regis-msds-610-data-engineering/src
+        target: /home/jovyan/work
+
+  mongo:
+    image: mongo:5.0.2-focal
+    container_name: mongodb
+    volumes:
+      - type: volume
+        source: mongo
+        target: /data/db
+
+  hadoop:
+    image: hadoop-dev:latest
+    container_name: hadoop
+    volumes:
+      - type: volume
+        source: hadoop-dfs
+        target: /var/hadoop
+
+      - type: bind
+        source: ./hadoop-single-node-cluster/docker-context/hadoop/core-site.xml
+        target: /opt/hadoop/etc/hadoop/core-site.xml
+
+      - type: bind
+        source: ./hadoop-single-node-cluster/docker-context/hadoop/hdfs-site.xml
+        target: /opt/hadoop/etc/hadoop/hdfs-site.xml
+
+      - type: bind
+        source: ./hadoop-single-node-cluster/docker-context/hadoop/yarn-site.xml
+        target: /opt/hadoop/etc/hadoop/yarn-site.xml
+
+      - type: bind
+        source: ./hadoop-single-node-cluster/docker-context/docker-entrypoint.sh
+        target: /usr/bin/docker-entrypoint.sh
+
+    ports:
+      - '9000:9000' # hdfs://
+      - '9870:9870' # http://
+
+volumes:
+  mongo:
+  hadoop-dfs:
+

@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  # Update this to the name of the service you want to work with in your docker-compose.yml file
+  vscode-dev:
+    image: vscode-dev:latest
+
+    build:
+      context: ./.devcontainer
+      dockerfile: ./Dockerfile
+
+    container_name: vscode-dev
+    hostname: vscode-dev
+
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+
+      # Reference: https://aka.ms/vscode-remote/samples/docker-from-docker-compose
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock 
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"
+ 
