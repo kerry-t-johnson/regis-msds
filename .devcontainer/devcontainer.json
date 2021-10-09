@@ -19,7 +19,10 @@
 	"runServices": [
 		"jupyter-dev",
 		"mongo",
-		"hadoop"
+		"hadoop",
+		"spark-master",
+		"spark-worker-1",
+		"spark-worker-2"
 	],
 	"postCreateCommand": ".devcontainer/post-create.sh"
 }

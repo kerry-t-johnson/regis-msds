@@ -7,6 +7,7 @@ services:
     hostname: jupyter-dev
     environment:
       - JUPYTER_ENABLE_LAB=yes
+      - PYTHONHASHSEED=537
     ports:
       - '8888:8888'
     volumes:
@@ -35,6 +36,10 @@ services:
         target: /var/hadoop
 
       - type: bind
+        source: ./data
+        target: /var/data
+
+      - type: bind
         source: ./hadoop-single-node-cluster/docker-context/hadoop/core-site.xml
         target: /opt/hadoop/etc/hadoop/core-site.xml
 
@@ -53,6 +58,47 @@ services:
     ports:
       - '9000:9000' # hdfs://
       - '9870:9870' # http://
+
+  spark-master:
+    image: my-bitnami-docker-spark:python-3.9
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - PYTHONHASHSEED=537
+    ports:
+      - '8080:8080'
+
+  spark-worker-1:
+    image: my-bitnami-docker-spark:python-3.9
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - PYTHONHASHSEED=537
+
+  spark-worker-2:
+    image: my-bitnami-docker-spark:python-3.9
+    container_name: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - PYTHONHASHSEED=537
 
 volumes:
   mongo:

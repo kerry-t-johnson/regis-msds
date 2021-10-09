@@ -7,3 +7,6 @@
 [submodule "hadoop-single-node-cluster"]
 	path = hadoop-single-node-cluster
 	url = git@github.com:kerry-t-johnson/hadoop-single-node-cluster.git
+[submodule "bitnami-docker-spark"]
+	path = bitnami-docker-spark
+	url = git@github.com:kerry-t-johnson/bitnami-docker-spark.git
