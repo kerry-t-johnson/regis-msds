@@ -24,5 +24,6 @@ RUN usermod -a -G docker jovyan
 USER jovyan
 
 # ===== VS Code-specific Stuff ===============================================
-RUN pip install         autopep8
+RUN pip install         autopep8    \
+                        pytest
 

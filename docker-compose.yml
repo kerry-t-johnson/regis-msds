@@ -15,9 +15,15 @@ services:
         source: ./regis-msds-jupyter/.jupyter
         target: /home/jovyan/.jupyter
 
+      # MSDS 650 - Data Analytics (2021 Fall 8wk 2)
       - type: bind
-        source: ./regis-msds-610-data-engineering/src
+        source: ./regis-msds-650-data-analytics
         target: /home/jovyan/work
+
+      # MSDS 610 - Data Engineering (2021 Fall 8wk 1)
+      # - type: bind
+      #   source: ./regis-msds-610-data-engineering/src
+      #   target: /home/jovyan/work
 
   mongo:
     image: mongo:5.0.2-focal
