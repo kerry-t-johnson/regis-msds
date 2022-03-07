@@ -17,7 +17,14 @@ RUN apt-get install -y  apt-transport-https                                 \
     apt-get update                                                      &&  \
     apt-get install -y  docker-ce                                           \
                         docker-ce-cli                                       \
-                        containerd.io
+                        containerd.io                                   &&  \
+    apt-get purge -y    python2.7                                           \
+                        python3.8                                       &&  \
+    apt autoremove -y                                                   &&  \
+    rm -rf  /etc/python2.7                                                  \
+            /etc/python3.8
+
+
 
 RUN usermod -a -G docker jovyan
 
@@ -25,5 +32,6 @@ USER jovyan
 
 # ===== VS Code-specific Stuff ===============================================
 RUN pip install         autopep8    \
+                        nltk        \
                         pytest
 

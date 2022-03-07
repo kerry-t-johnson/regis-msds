@@ -15,10 +15,15 @@ services:
         source: ./regis-msds-jupyter/.jupyter
         target: /home/jovyan/.jupyter
 
-      # MSDS 650 - Data Analytics (2021 Fall 8wk 2)
+      # MSDS 680 - Machine Learning (2022 Spring 8wk 1)
       - type: bind
-        source: ./regis-msds-650-data-analytics
+        source: ./regis-msds-684-reinforcement-learning
         target: /home/jovyan/work
+
+      # MSDS 650 - Data Analytics (2021 Fall 8wk 2)
+      # - type: bind
+      #   source: ./regis-msds-650-data-analytics
+      #   target: /home/jovyan/work
 
       # MSDS 610 - Data Engineering (2021 Fall 8wk 1)
       # - type: bind
